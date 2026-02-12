@@ -1,0 +1,28 @@
+{
+  "recuerdos": [
+    {
+      "texto": "El usuario informa que su madre falleció hace dos años.",
+      "fecha": "2026-02-11T21:15:10.763Z"
+    },
+    {
+      "texto": "El usuario expresa que su esposa falleció hace un mes y se siente mal.",
+      "fecha": "2026-02-11T21:23:08.492Z"
+    },
+    {
+      "texto": "El usuario expresa tristeza por la muerte de su esposo.",
+      "fecha": "2026-02-11T22:56:18.290Z"
+    }
+  ],
+  "uso": {
+    "fecha": "2026-02-11",
+    "mensajes": 2
+  },
+  "metricas": {
+    "totalMensajes": 2,
+    "totalSesiones": 1,
+    "diasActivos": [
+      "2026-02-11"
+    ],
+    "ultimaSesion": "2026-02-11T23:12:10.296Z"
+  }
+}
