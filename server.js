@@ -50,10 +50,23 @@ app.post("/chat", async (req, res) => {
 
     let historial = [];
 
-    if (fs.existsSync(userFilePath)) {
-      const fileData = fs.readFileSync(userFilePath, "utf8");
-      historial = JSON.parse(fileData);
-    }
+if (fs.existsSync(userFilePath)) {
+  const fileData = fs.readFileSync(userFilePath, "utf8");
+  const parsed = JSON.parse(fileData);
+
+  // Si es arreglo → perfecto
+  if (Array.isArray(parsed)) {
+    historial = parsed;
+  } 
+  // Si es formato antiguo → convertirlo
+  else if (parsed.historial && Array.isArray(parsed.historial)) {
+    historial = parsed.historial;
+  } 
+  // Si está corrupto → reiniciar
+  else {
+    historial = [];
+   }
+  }
 
     historial.push({ role: "user", content: mensaje });
 
