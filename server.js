@@ -99,6 +99,51 @@ if (fs.existsSync(userFilePath)) {
 });
 
 /* ============================= */
+/* PANEL DE MÉTRICAS */
+/* ============================= */
+
+app.get("/admin/metrics", (req, res) => {
+  try {
+    const files = fs.readdirSync(memoryFolder);
+
+    let totalUsuarios = files.length;
+    let totalMensajesGlobal = 0;
+
+    let usuarios = [];
+
+    files.forEach(file => {
+      const filePath = path.join(memoryFolder, file);
+      const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+
+      const userId = file.replace(".json", "");
+
+      let totalMensajes = 0;
+
+      if (Array.isArray(data)) {
+        totalMensajes = data.length;
+      }
+
+      totalMensajesGlobal += totalMensajes;
+
+      usuarios.push({
+        userId,
+        totalMensajes
+      });
+    });
+
+    res.json({
+      totalUsuarios,
+      totalMensajesGlobal,
+      usuarios
+    });
+
+  } catch (error) {
+    console.error("Error métricas:", error);
+    res.status(500).json({ error: "Error obteniendo métricas" });
+  }
+});
+
+/* ============================= */
 /* HEALTH CHECK */
 /* ============================= */
 
